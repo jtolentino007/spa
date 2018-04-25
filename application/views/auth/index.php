@@ -7,9 +7,10 @@
 		<script src="./assets/frontend-assets/pace/pace.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="./assets/frontend-assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./assets/frontend-assets/css/fa-svg-with-js.css">
-		<link rel="stylesheet" href="./assets/frontend-assets/css/app.css">
 		<link rel="stylesheet" href="./assets/frontend-assets/DataTables/datatables.min.css">
 		<link rel="stylesheet" href="./assets/frontend-assets/toastr/toastr.min.css">
+		<link rel="stylesheet" href="./assets/frontend-assets/css/app.css">
+		<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 		<script src="./assets/frontend-assets/jquery/jquery.min.js" type="text/javascript"></script>
 		<script src="./assets/frontend-assets/DataTables/datatables.min.js" type="text/javascript"></script>
 		<script src="./assets/frontend-assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -29,27 +30,34 @@
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarColor02">
-		    <ul class="navbar-nav mr-auto">
+				<ul class="nav navbar-nav mr-auto"></ul>
+		    <ul class="navbar-nav mr-right">
 		      <li class="nav-item">
-		        <a class="nav-link" href="dashboard">Dashboard</a>
+		        <a class="nav-link text-center" href="dashboard"><i class="fa fa-dashboard"></i><br>DASHBOARD</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="clients">Clients</a>
+		        <a class="nav-link text-center" href="clients"><i class="fa fa-users"></i><br>CLIENTS</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="staffs">Staffs</a>
+		        <a class="nav-link text-center" href="staffs"><i class="fa fa-user"></i><br>STAFFS</a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" href="beds">Beds</a>
+		        <a class="nav-link text-center" href="sections"><i class="fa fa-box"></i><br>SECTIONS</a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" href="services">Services</a>
+		        <a class="nav-link text-center" href="beds"><i class="fa fa-bed"></i><br>BEDS</a>
+		      </li>
+					<li class="nav-item">
+		        <a class="nav-link text-center" href="services"><i class="fa fa-cogs"></i><br>SERVICES</a>
+		      </li>
+					<li class="nav-item">
+		        <a class="nav-link text-center" href="transaction"><i class="fa fa-th-large"></i><br>TRANSACTION</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="settings">Settings</a>
+		        <a class="nav-link text-center" href="settings"><i class="fa fa-cog"></i><br>SETTINGS</a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" href="auth/logout">Logout</a>
+		        <a class="nav-link text-center" href="auth/logout"><i class="fa fa-dashboard"></i><br>LOGOUT</a>
 		      </li>
 		    </ul>
 		  </div>
