@@ -4,5 +4,38 @@
 }
 
 body {
-  zoom: 85%!important;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.modal-header {
+  background: #2196f3!important;
+  color: white!important;
+  text-transform: uppercase;
+  font-weight: bolder!important;
+}
+
+.nav-item {
+  background: #158CBA;
+  margin-left: 10px;
+  min-width: 100px;
+  border: 1px solid #127ba3;
+  border-bottom-width: 5px;
+  border-radius: 5px;
+}
+
+.nav-item:hover {
+  background: #189dd1;
+}
+
+.nav-link {
+  color: white!important;
+}
+
+.table {
+  border: 1px solid #dee2e6;
+}
+
+.table thead th {
+  background: #158CBA!important;
+  color: white;
 }
