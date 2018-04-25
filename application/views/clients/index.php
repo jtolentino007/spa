@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./assets/application/clients/app.css">
+
 <div class="row" style="padding: 0 10px;">
   <div class="col">
     <div class="card text-white bg-light">
@@ -5,7 +7,7 @@
         <h3><i class="fa fa-users"></i> CLIENTS</h3><hr>
         <table id="tbl_clients" class="table table-hover">
           <thead>
-            <th></th>
+            <th width="3%"></th>
             <th>Client name</th>
             <th>Address</th>
             <th>Email Address</th>
@@ -29,11 +31,18 @@
         </div>
         <div class="modal-body">
           <form id="frm_client">
+            <div class="container text-center">
+              <img class="image rounded-circle img-thumbnail" src="./assets/application/img/user-default.png" style="border: 1px solid gray; height: 150px; width: 155px;">
+              <div class="overlay">
+                <div class="text">Browse Image</div>
+              </div>
+              <input id="img-file" class="d-none" type="file">
+            </div>
             <input type="hidden" name="customer_id">
             <label>Client Name:</label>
             <input type="text" name="customer_name" class="form-control" placeholder="John Doe">
             <label>Address:</label>
-            <input type="text" name="address" class="form-control" placeholder="New york City">
+            <input type="text" name="address" class="form-control" placeholder="New York City">
             <label>E-mail address:</label>
             <input type="email" name="email_address" class="form-control" placeholder="johndoe@email.com">
             <label>Mobile number:</label>

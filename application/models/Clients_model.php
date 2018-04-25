@@ -26,7 +26,8 @@
         'customer_name' => $this->input->post('customer_name',TRUE),
         'address' => $this->input->post('address',TRUE),
         'email_address' => $this->input->post('email_address',TRUE),
-        'mobile_no' => $this->input->post('mobile_no',TRUE)
+        'mobile_no' => $this->input->post('mobile_no',TRUE),
+        'photo_path' => $this->input->post('photo_path',TRUE)
       );
 
       if ($id == 0) {

@@ -24,8 +24,8 @@
       "ajax": 'Clients/get',
       "columns": [
         {
-          targets:[0],render:function() {
-            return "";
+          targets:[0],data:"photo_path",render:function(data, type, row, meta) {
+            return "<img class='rounded-circle' src='"+data+"' style='width: 50px; height: 50px; border: 1px solid #e2e2e2'/>";
           }
         },
         { targets:[1],data:"customer_name" },
@@ -36,7 +36,7 @@
           targets:[5],
           class: 'text-center',
           render: function(){
-            return '<button class="btn btn-primary btn-edit-info"><i class="fa fa-edit"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-client"><i class="fa fa-trash"></i></button>'
+            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-edit"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-client rounded-circle"><i class="fa fa-trash"></i></button>'
           }
         }
       ]
@@ -56,6 +56,7 @@
       $('input[name="address"]').val(_clientsData.address);
       $('input[name="email_address"]').val(_clientsData.email_address);
       $('input[name="mobile_no"]').val(_clientsData.mobile_no);
+      $('.image').attr('src',_clientsData.photo_path);
 
       _modalClient.modal('show');
     });
@@ -78,6 +79,37 @@
       });
     });
 
+    $('.overlay').click(function(e){
+      e.preventDefault();
+      $('#img-file').click();
+    });
+
+    $('#img-file').change(function(e){
+      var file = e.target.files[0];
+      var imageType = /image.*/;
+
+      if (!file.type.match(imageType)) return;
+
+      var form_data = new FormData();
+      form_data.append('image_file', file);
+
+      $.ajax({
+        url:'upload/ajax_upload',
+        method:'POST',
+        dataType:'json',
+        data:form_data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success:function(response) {
+          if (response.status == "success")
+            $('.image').attr('src', response.img_src);
+          else
+            toastr.error(response.message);
+        }
+      });
+    });
+
     $('#btn-new-customer').click(function(){
       _mode = "add";
       $(this).removeAttr('disabled');
@@ -89,7 +121,7 @@
     $('#btn-save-client').click(function(){
 
       var _data = $('#frm_client').serializeArray();
-
+      _data.push({name: 'photo_path', value: $('.image').attr('src')});
       if (_mode == "add") {
         saveClient(_data).done(function(response){
           if (response.status == "success") {
@@ -148,6 +180,7 @@
   function clearForm() {
     $('form').find("input[type=text], textarea").val("");
     $("form input[type='hidden']").val("0");
+    $('.image').attr('src', './assets/application/img/user-default.png');
     $("form input:text").first().focus();
   }
 
