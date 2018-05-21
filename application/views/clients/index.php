@@ -5,14 +5,14 @@
     <div class="card text-white bg-light">
       <div class="card-body" style="color: #404040;">
         <h3><i class="fa fa-users"></i> CLIENTS</h3><hr>
-        <table id="tbl_clients" class="table table-hover">
+        <table id="tbl_clients" class="table table-hover" width="100%;">
           <thead>
             <th width="3%"></th>
             <th>Client name</th>
             <th>Address</th>
             <th>Email Address</th>
             <th>Mobile number</th>
-            <th>Action</th>
+            <th width="5%">Action</th>
           </thead>
           <tbody>
           </tbody>
@@ -39,14 +39,16 @@
               <input id="img-file" class="d-none" type="file">
             </div>
             <input type="hidden" name="customer_id">
-            <label>Client Name:</label>
-            <input type="text" name="customer_name" class="form-control" placeholder="John Doe">
+            <label>First Name:</label>
+            <input type="text" name="first_name" class="form-control" placeholder="John">
+            <label>Last Name:</label>
+            <input type="text" name="last_name" class="form-control" placeholder="Doe">
             <label>Address:</label>
             <input type="text" name="address" class="form-control" placeholder="New York City">
             <label>E-mail address:</label>
-            <input type="email" name="email_address" class="form-control" placeholder="johndoe@email.com">
+            <input type="email" name="email" class="form-control" placeholder="johndoe@email.com">
             <label>Mobile number:</label>
-            <input type="text" name="mobile_no" class="form-control" placeholder="xxxx-xxx-xxxx">
+            <input type="text" name="phone" class="form-control" placeholder="xxxx-xxx-xxxx">
           </form>
         </div>
         <div class="modal-footer">

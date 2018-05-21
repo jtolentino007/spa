@@ -10,13 +10,26 @@
 
     public function get_staffs()
     {
-      $query = $this->db->get_where('staffs', array('is_deleted' => FALSE));
+      $query = $this
+               ->db
+               ->select('*')
+               ->from('staffs')
+               ->join('sections', 'sections.sections_id=staffs.section_id','left')
+               ->where('staffs.is_deleted = FALSE')
+               ->get();
+
       return $query->result_array();
     }
 
     public function get_staff_by_id($id = 0)
     {
-      $query = $this->db->get_where('staffs', array('staff_id' => $id));
+      $query = $this
+               ->db
+               ->select('*')
+               ->from('staffs')
+               ->join('sections', 'sections.sections_id=staffs.section_id','left')
+               ->where('staffs.is_deleted = FALSE AND staffs.staff_id = '.$id)
+               ->get();
       return $query->result_array();
     }
 
@@ -24,6 +37,7 @@
     {
       $data = array(
         'staff_name' => $this->input->post('staff_name',TRUE),
+        'section_id' => $this->input->post('section_id',TRUE),
         'photo_path' => $this->input->post('photo_path',TRUE)
       );
 

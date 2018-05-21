@@ -28,13 +28,14 @@
       $this->load->helper('form');
       $this->load->library('form_validation');
 
-      $this->form_validation->set_rules('customer_name', 'Customer name', 'required');
+      $this->form_validation->set_rules('first_name', 'First name', 'required');
+      $this->form_validation->set_rules('last_name', 'Last name', 'required');
       $this->form_validation->set_rules('email_address', 'E-mail Address', 'valid_email');
 
       if ($this->form_validation->run() === FALSE)
       {
         $response['status'] = "error";
-        $response['data'] = form_error('customer_name').form_error('email_address');
+        $response['data'] = form_error('first_name').form_error('last_name').form_error('email_address');
       }
       else
       {
@@ -56,13 +57,14 @@
       $this->load->helper('form');
       $this->load->library('form_validation');
 
-      $this->form_validation->set_rules('customer_name', 'Customer name', 'required');
+      $this->form_validation->set_rules('first_name', 'First name', 'required');
+      $this->form_validation->set_rules('last_name', 'Last name', 'required');
       $this->form_validation->set_rules('email_address', 'E-mail Address', 'valid_email');
 
       if ($this->form_validation->run() === FALSE)
       {
         $response['status'] = "error";
-        $response['data'] = form_error('customer_name').form_error('email_address');
+        $response['data'] = form_error('first_name').form_error('last_name').form_error('email_address');
       }
       else
       {

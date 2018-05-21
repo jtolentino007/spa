@@ -28,15 +28,20 @@
             return "<img class='rounded-circle' src='"+data+"' style='width: 50px; height: 50px; border: 1px solid #e2e2e2'/>";
           }
         },
-        { targets:[1],data:"customer_name" },
+        {
+          targets:[1],
+          render: function(data, type, row, meta) {
+            return row.first_name + ' ' + row.last_name;
+          }
+        },
         { targets:[2],data:"address" },
-        { targets:[3],data:"email_address" },
-        { targets:[4],data:"mobile_no" },
+        { targets:[3],data:"email" },
+        { targets:[4],data:"phone" },
         {
           targets:[5],
           class: 'text-center',
           render: function(){
-            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-edit"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-client rounded-circle"><i class="fa fa-trash"></i></button>'
+            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-pencil-alt"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-client rounded-circle"><i class="fa fa-trash"></i></button>'
           }
         }
       ]
@@ -52,10 +57,11 @@
       var _clientsData = _dTableClients.row(_selectedTr).data();
 
       $('input[name="customer_id"]').val(_clientsData.customer_id);
-      $('input[name="customer_name"]').val(_clientsData.customer_name);
+      $('input[name="first_name"]').val(_clientsData.first_name);
+      $('input[name="last_name"]').val(_clientsData.last_name);
       $('input[name="address"]').val(_clientsData.address);
-      $('input[name="email_address"]').val(_clientsData.email_address);
-      $('input[name="mobile_no"]').val(_clientsData.mobile_no);
+      $('input[name="email"]').val(_clientsData.email);
+      $('input[name="phone"]').val(_clientsData.phone);
       $('.image').attr('src',_clientsData.photo_path);
 
       _modalClient.modal('show');

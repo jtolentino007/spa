@@ -35,7 +35,7 @@
           targets:[3],
           class: 'text-center',
           render: function(){
-            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-edit"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-section rounded-circle"><i class="fa fa-trash"></i></button>'
+            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-pencil-alt"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-section rounded-circle"><i class="fa fa-trash"></i></button>'
           }
         }
       ]

@@ -15,6 +15,11 @@
   var _tblClientBody = $('#tbl_staffs tbody');
   var _dialog = $('#dialog-confirmation');
   var _staffID;
+  var _selectSection  = $('#cbo-section').select2({
+                          dropdownParent: $('#modal_staffs'),
+                          placeholder: "Select a Section",
+                          allowClear: true
+                        });
 
   $(function() {
     // The DOM is ready!
@@ -29,17 +34,20 @@
           }
         },
         { targets:[1],data:"staff_name" },
+        { targets:[2],data:"section_name" },
         {
-          targets:[2],
+          targets:[3],
           class: 'text-center',
           render: function(){
-            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-edit"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-staff rounded-circle"><i class="fa fa-trash"></i></button>'
+            return '<button class="btn btn-primary btn-edit-info rounded-circle"><i class="fa fa-pencil-alt"></i></button>' + ' ' + '<button class="btn btn-danger btn-remove-staff rounded-circle"><i class="fa fa-trash"></i></button>'
           }
         }
       ]
     });
 
     $("div.toolbar").html('<button id="btn-new-staff" class="btn btn-primary toolbtn"><i class="fa fa-plus"></i> New Staff</button>');
+
+    fillSelect2();
 
     _tblClientBody.on('click', '.btn-edit-info',function(){
       _mode = "edit";
@@ -51,6 +59,7 @@
       $('input[name="staff_id"]').val(_staffData.staff_id);
       $('input[name="staff_name"]').val(_staffData.staff_name);
       $('.image').attr('src',_staffData.photo_path);
+      _selectSection.select2('val',_staffData.section_id);
 
       _modalStaffs.modal('show');
     });
@@ -108,6 +117,7 @@
       _mode = "add";
       $(this).removeAttr('disabled');
       clearForm();
+      $("#cbo-section").val('').trigger('change');
       _modalStaffs.modal('show');
       $("form input:text").first().focus();
     });
@@ -176,6 +186,22 @@
     $("form input[type='hidden']").val("0");
     $('.image').attr('src', './assets/application/img/user-default.png');
     $("form input:text").first().focus();
-  }
+  };
+
+  function fillSelect2() {
+    var items = "";
+
+    $.ajax({
+      "url":"sections/get",
+      "dataType":"json",
+      "type":"GET"
+    }).done(function(response){
+      $.each(response.data, function(index, data){
+        items += "<option value='"+data.sections_id+"'>"+data.section_name+"</option>";
+      });
+      _selectSection.append(items);
+    });
+
+  };
 
 }));

@@ -38,7 +38,7 @@
     public function remove_section($id)
     {
       $this->db->where('sections_id', $id);
-      return $this->db->update('sections',array('is_deleted' => TRUE,'is_active' => TRUE));
+      return $this->db->update('sections',array('is_deleted' => TRUE,'is_active' => FALSE));
     }
   }
 

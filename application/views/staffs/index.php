@@ -5,10 +5,11 @@
     <div class="card text-white bg-light">
       <div class="card-body" style="color: #404040;">
         <h3><i class="fa fa-users"></i> STAFFS</h3><hr>
-        <table id="tbl_staffs" class="table table-hover">
+        <table id="tbl_staffs" class="table table-hover" width="100%">
           <thead>
             <th width="1%"></th>
             <th>Staff name</th>
+            <th>Staff Department</th>
             <th>Action</th>
           </thead>
           <tbody>
@@ -38,6 +39,8 @@
             <input type="hidden" name="staff_id">
             <label>Staff Name:</label>
             <input type="text" name="staff_name" class="form-control" placeholder="John Doe">
+            <label>Staff Department:</label>
+            <select id="cbo-section" name="section_id" style="width:100%;"></select>
           </form>
         </div>
         <div class="modal-footer">

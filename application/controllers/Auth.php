@@ -381,11 +381,6 @@ class Auth extends AIMS_Controller
 	 */
 	public function deactivate($id = NULL)
 	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			// redirect them to the home page because they must be an administrator to view this
-			return show_error('You must be an administrator to view this page.');
-		}
 
 		$id = (int)$id;
 
@@ -429,13 +424,6 @@ class Auth extends AIMS_Controller
 	 */
 	public function create_user()
 	{
-		$this->data['title'] = $this->lang->line('create_user_heading');
-
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth', 'refresh');
-		}
-
 		$tables = $this->config->item('tables', 'ion_auth');
 		$identity_column = $this->config->item('identity', 'ion_auth');
 		$this->data['identity_column'] = $identity_column;
@@ -469,71 +457,30 @@ class Auth extends AIMS_Controller
 				'company' => $this->input->post('company'),
 				'phone' => $this->input->post('phone'),
 			);
+			$group = array('2');
 		}
-		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
+
+		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $group))
 		{
+			$this->load->database();
+			$users = $this->db->order_by('id',"desc")
+					->limit(1)
+					->get('users')
+					->row();
+
 			// check to see if we are creating the user
 			// redirect them back to the admin page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			$response['status'] = "success";
+			$response['data'] = "User successfully added";
+			$response['user'] = $this->ion_auth->user($users->id)->row();
 		}
 		else
 		{
-			// display the create user form
-			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-
-			$this->data['first_name'] = array(
-				'name' => 'first_name',
-				'id' => 'first_name',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('first_name'),
-			);
-			$this->data['last_name'] = array(
-				'name' => 'last_name',
-				'id' => 'last_name',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('last_name'),
-			);
-			$this->data['identity'] = array(
-				'name' => 'identity',
-				'id' => 'identity',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('identity'),
-			);
-			$this->data['email'] = array(
-				'name' => 'email',
-				'id' => 'email',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('email'),
-			);
-			$this->data['company'] = array(
-				'name' => 'company',
-				'id' => 'company',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('company'),
-			);
-			$this->data['phone'] = array(
-				'name' => 'phone',
-				'id' => 'phone',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone'),
-			);
-			$this->data['password'] = array(
-				'name' => 'password',
-				'id' => 'password',
-				'type' => 'password',
-				'value' => $this->form_validation->set_value('password'),
-			);
-			$this->data['password_confirm'] = array(
-				'name' => 'password_confirm',
-				'id' => 'password_confirm',
-				'type' => 'password',
-				'value' => $this->form_validation->set_value('password_confirm'),
-			);
-
-			$this->_render_page('auth/create_user', $this->data);
+			$response['status'] = "error";
+			$response['data'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 		}
+
+		echo json_encode($response);
 	}
 
 	/**

@@ -29,11 +29,12 @@
       $this->load->library('form_validation');
 
       $this->form_validation->set_rules('staff_name', 'Staff name', 'required');
+      $this->form_validation->set_rules('section_id', 'Department', 'required');
 
       if ($this->form_validation->run() === FALSE)
       {
         $response['status'] = "error";
-        $response['data'] = form_error('staff_name');
+        $response['data'] = form_error('staff_name').form_error('section_id');
       }
       else
       {
@@ -56,11 +57,12 @@
       $this->load->library('form_validation');
 
       $this->form_validation->set_rules('staff_name', 'Staff name', 'required');
+      $this->form_validation->set_rules('section_id', 'Department', 'required');
 
       if ($this->form_validation->run() === FALSE)
       {
         $response['status'] = "error";
-        $response['data'] = form_error('staff_name');
+        $response['data'] = form_error('staff_name').form_error('section_id');
       }
       else
       {
